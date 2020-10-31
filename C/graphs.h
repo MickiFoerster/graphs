@@ -1,9 +1,16 @@
 #pragma once
+#include <stdbool.h>
 
-typedef struct tag_node {
+struct node_s {
   void *data;
-  struct tag_Node **neighbours;
-} node_t;
+  struct neigbours_s {
+    struct node_s *neighbour;
+    struct neigbours_s *next;
+  } * neighbour;
+};
+
+typedef struct node_s node_t;
+typedef struct neighbour_s neighbour_t;
 
 node_t *newNode(void *_data);
-void connectNodes(node_t *node, node_t *neighbour) {}
+bool connectNodes(node_t *node, node_t *neighbour);
