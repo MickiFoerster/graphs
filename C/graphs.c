@@ -1,4 +1,5 @@
 #include "graphs.h"
+#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +8,7 @@ node_t *newNode(void *_data) {
   node_t *node = (node_t *)malloc(sizeof(node_t));
   if (node) {
     node->data = _data;
-    node->neighbour = NULL;
+    node->neighbours = NULL;
   }
   return node;
 }
@@ -26,10 +27,17 @@ bool connectNodes(node_t *node, node_t *neighbour) {
     return false;
   }
 
-  if (node->neighbour == NULL) {
-    neighbour_t n = newNeighbour(neighbour);
-    node->neighbour = n;
-    ret
+  if (node->neighbours == NULL) {
+    node->neighbours = newNeighbour(neighbour);
+    return (node->neighbours != NULL);
   }
-  neighbours_t *runner = node;
+
+  neighbour_t *n = node->neighbours;
+  while (n->next != NULL) {
+    n = n->next;
+  }
+  assert(n->next == NULL);
+  n->next = newNeighbour(neighbour);
+
+  return (n->next != NULL);
 }
