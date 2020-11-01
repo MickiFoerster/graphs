@@ -8,6 +8,7 @@ node_t *newNode(void *_data) {
   node_t *node = (node_t *)malloc(sizeof(node_t));
   if (node) {
     node->data = _data;
+    node->visited = false;
     node->neighbours = NULL;
   }
   return node;
@@ -41,3 +42,37 @@ bool connectNodes(node_t *node, node_t *neighbour) {
 
   return (n->next != NULL);
 }
+
+static void print(node_t *node) {
+  if (node->visited) {
+    return;
+  }
+  node->visited = true;
+  neighbour_t *n = node->neighbours;
+  while (n != NULL) {
+    printf("    %s -- %s\n", (const char *)node->data,
+           (const char *)n->neighbour->data);
+    print(n->neighbour);
+    n = n->next;
+  }
+}
+
+static void unvisit(node_t *node) {
+  if (!node->visited) {
+    return;
+  }
+  node->visited = false;
+  neighbour_t *n = node->neighbours;
+  while (n != NULL) {
+    unvisit(n->neighbour);
+    n = n->next;
+  }
+}
+
+void dot_dump(node_t *node) {
+  printf("graph {\n");
+  print(node);
+  printf("}\n");
+  unvisit(node);
+}
+

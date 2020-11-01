@@ -11,8 +11,10 @@ struct neighbour_s {
 
 struct node_s {
   void *data;
+  bool visited;
   neighbour_t *neighbours;
 };
 
 node_t *newNode(void *_data);
 bool connectNodes(node_t *node, node_t *neighbour);
+void dot_dump(node_t *node);
