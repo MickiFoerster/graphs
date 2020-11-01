@@ -5,7 +5,7 @@ type Node struct {
 	neighbours []Node
 }
 
-func newNode(data interface{}) *Node {
+func NewNode(data interface{}) *Node {
 	return &Node{
 		data:       data,
 		neighbours: []Node{},
