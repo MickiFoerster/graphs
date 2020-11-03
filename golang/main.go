@@ -20,7 +20,5 @@ func main() {
 	D.Connect(F)
 	F.Connect(A)
 
-	fmt.Println("graph {")
-	fmt.Printf("%v\n", A)
-	fmt.Println("}")
+	fmt.Print(A.DotDump())
 }

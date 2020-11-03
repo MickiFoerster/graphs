@@ -32,3 +32,11 @@ func (node *Node) String() string {
 	}
 	return s
 }
+
+func (node *Node) DotDump() string {
+	var s string
+	s += fmt.Sprintln("graph {")
+	s += fmt.Sprintf("%v", node)
+	s += fmt.Sprintln("}")
+	return s
+}
