@@ -1,17 +1,23 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <vector>
 
 class Data;
 
 class Node {
-  std::unique_ptr<Data> data;
+  std::shared_ptr<Data> data;
   bool visited;
-  std::vector<Node *> neighbours;
-  Node(std::unique_ptr<Data> _data);
+  std::vector<std::shared_ptr<Node>> neighbours;
+  Node(std::shared_ptr<Data> _data);
 
 public:
-  void Connect(Node *node);
-  friend std::unique_ptr<Node> newNode(std::unique_ptr<Data> _data);
+  ~Node();
+  void Connect(std::shared_ptr<Node> node);
+  void Print(std::ostream &os);
+  friend std::shared_ptr<Node> newNode(std::shared_ptr<Data> _data);
+  friend std::ostream &operator<<(std::ostream &os, std::shared_ptr<Node> node);
 };
+
+std::shared_ptr<Node> newNode(std::shared_ptr<Data> _data);
