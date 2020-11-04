@@ -3,12 +3,15 @@
 #include <memory>
 #include <vector>
 
+class Data;
+
 class Node {
-  const void *data;
+  std::unique_ptr<Data> data;
   bool visited;
   std::vector<Node *> neighbours;
+  Node(std::unique_ptr<Data> _data);
 
 public:
-  Node(const void *data);
   void Connect(Node *node);
+  friend std::unique_ptr<Node> newNode(std::unique_ptr<Data> _data);
 };
