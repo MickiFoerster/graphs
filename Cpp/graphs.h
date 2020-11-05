@@ -18,3 +18,4 @@ public:
 };
 
 std::shared_ptr<Node> newNode(const std::string &data);
+void dot_dump(std::ostream &os, const std::shared_ptr<Node> &node);

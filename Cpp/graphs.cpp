@@ -10,7 +10,12 @@ std::shared_ptr<Node> newNode(const std::string &data) {
   return std::shared_ptr<Node>(new Node{data});
 }
 
-std::ostream &operator<<(std::ostream &os, std::shared_ptr<Node> node) {
+void dot_dump(std::ostream &os, const std::shared_ptr<Node> &node) {
+  os << "digraph {\n" << node << "}\n";
+}
+
+std::ostream &
+operator<<(std::ostream &os, std::shared_ptr<Node> node) {
   if (node->visited) {
     return os;
   }

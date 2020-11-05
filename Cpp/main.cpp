@@ -14,6 +14,6 @@ int main() {
   D->Connect(F);
   F->Connect(A);
 
-  std::cerr << A;
+  dot_dump(std::cout, A);
   return 0;
 }
