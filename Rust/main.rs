@@ -1,3 +1,9 @@
+struct Node<T><'z> {
+    data: T,
+    neighbours: Vec<&Node>
+}
+
+
 fn main() {
-    println!("grahps in Rust");
+   let n = Node<i32>{ data: 23 }; 
 }
